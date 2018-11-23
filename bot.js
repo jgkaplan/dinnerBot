@@ -81,7 +81,7 @@ client.on('message', msg => {
 				// 	return l.join('\n');
 				// }).join('\n');
 				let foodList = hall.food.map(function(menuItem){
-					let l = [`${menuItem.category}`];
+					let l = [`__${menuItem.category}__`];
 					for(item of menuItem.items){
 						l.push(`\t- ${item.item}`);
 					}
