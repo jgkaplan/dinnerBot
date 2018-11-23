@@ -65,7 +65,7 @@ client.on('message', msg => {
 			}
 			const embed = new RichEmbed()
 				.setTitle('West Campus Menus')
-				.setColor(0xB83201)
+				.setColor(0x7bc043)
 				.setDescription('Menus of the West Campus dining halls');
 			for(let hall of hallFoods){
 				// let tmp = hall.food.reduce(function(memo, food) {
@@ -99,7 +99,7 @@ client.on('message', msg => {
 	}else if(msg.content.startsWith(config.startingSymbol + 'help')){
 		const embed = new RichEmbed()
 				.setTitle('Command Help')
-				.setColor(0x000000)
+				.setColor(0x0392cf)
 				.setDescription('Here are the commands that can be used with this bot.')
 				.addField(config.startingSymbol+'ping', 'The server will respond with Pong.')
 				.addField(config.startingSymbol+'poll', 'Start a dinner poll. Click the reacts to vote.')
