@@ -18,7 +18,7 @@ client.on('message', msg => {
 	}else if (msg.content.startsWith(config.startingSymbol + 'poll')) {
 		const embed = new RichEmbed()
 			.setTitle('Dinner Poll')
-			.setColor(0xB83201)
+			.setColor(0x9909f2)
 			.setDescription('Where do people want to go for dinner?')
 			.setFooter('🇧: Becker, 🇹: Bethe, 🇷: Rose, 🇨: Cook, 🇰: Keeton');
 		msg.channel.send(embed).then((sentMessage) => {
@@ -97,7 +97,16 @@ client.on('message', msg => {
 			msg.channel.send('Error: Unable to fetch dining data.');
 		});
 	}else if(msg.content.startsWith(config.startingSymbol + 'help')){
-
+		const embed = new RichEmbed()
+				.setTitle('Command Help')
+				.setColor(0x000000)
+				.setDescription('Here are the commands that can be used with this bot.')
+				.addField(config.startingSymbol+'ping', 'The server will respond with Pong.')
+				.addField(config.startingSymbol+'poll', 'Start a dinner poll. Click the reacts to vote.')
+				.addField(config.startingSymbol+'dining', 'Get information about dinner options at the West Campus dining halls.')
+				.addField(config.startingSymbol+'anyone or @anyone', 'Alert a random person in the channel.')
+				.addField(config.startingSymbol+'help', 'Display this help information.');
+		msg.channel.send(embed);
 	}
 	if(msg.content.startsWith(config.startingSymbol + 'anyone') || msg.content.includes('@anyone')) {
 		msg.channel.send("", {reply: msg.channel.members.random()});
