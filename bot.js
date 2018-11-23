@@ -4,11 +4,13 @@ const axios = require('axios');
 const moment = require('moment');
 
 const client = new Client();
-funciton isToday(day){
+
+function isToday(day){
 	return day.date() == moment().date()
 		&& day.year() == moment().year()
 		&& day.month() == moment().month();
 }
+
 client.on('message', msg => {
 	if(msg.author === client.user) return;
 	if (msg.content.startsWith(config.startingSymbol + 'ping')) {
@@ -41,10 +43,22 @@ client.on('message', msg => {
 							}).map((hall) => {
 								let meals = hall.operatingHours.find(function(event){
 									return isToday(moment(event.date, 'YYYY-MM-DD'))
-								}).events;
-								meals.
-								return {name: hall.nameshort, food: hall.diningItems}
-							});
+								});
+								if (meals){
+									meals = meals.events;
+								}else{
+									return;
+								}
+								let menu = meals.find(function(meal){
+									return meal.descr == "Dinner";
+								});
+								if (menu){
+									menu = menu.menu;
+								}else{
+									return;
+								}
+								return {name: hall.nameshort, food: menu}
+							}).filter((hall) => hall != undefined);
 			if(hallFoods.length == 0){
 				msg.channel.send('Error: No food data, or dining halls are closed.');
 				return;
@@ -54,15 +68,22 @@ client.on('message', msg => {
 				.setColor(0xB83201)
 				.setDescription('Menus of the West Campus dining halls');
 			for(let hall of hallFoods){
-				let tmp = hall.food.reduce(function(memo, food) {
-				    if (!memo[food.category]) memo[food.category] = [];
-				    memo[food.category].push(food.item);
-				    return memo;
-				}, {});
-				let foodList = Object.keys(tmp).map(function(category){
-					let l = [`${category}`];
-					for(v of tmp[category]){
-						l.push(`\t- ${v}`);
+				// let tmp = hall.food.reduce(function(memo, food) {
+				//     if (!memo[food.category]) memo[food.category] = [];
+				//     memo[food.category].push(food.item);
+				//     return memo;
+				// }, {});
+				// let foodList = Object.keys(tmp).map(function(category){
+				// 	let l = [`${category}`];
+				// 	for(v of tmp[category]){
+				// 		l.push(`\t- ${v}`);
+				// 	}
+				// 	return l.join('\n');
+				// }).join('\n');
+				let foodList = hall.food.map(function(menuItem){
+					let l = [`${menuItem.category}`];
+					for(item of menuItem.items){
+						l.push(`\t- ${item.item}`);
 					}
 					return l.join('\n');
 				}).join('\n');
