@@ -97,15 +97,13 @@ client.on('message', msg => {
 			msg.channel.send('Error: Unable to fetch dining data.');
 		});
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'owo')){
-		let uwu = (Math.floor(Math.random()*2)?'u':'U')
-				+ (Math.floor(Math.random()*2)?'w':'W')
-				+ (Math.floor(Math.random()*2)?'u':'U');
-		msg.channel.send(uwu);
+		let u = (Math.floor(Math.random()*2)?'u':'U');
+		let w = (Math.floor(Math.random()*2)?'w':'W');
+		msg.channel.send(u + w + u);
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'uwu')){
-		let owo = (Math.floor(Math.random()*2)?'o':'O')
-				+ (Math.floor(Math.random()*2)?'w':'W')
-				+ (Math.floor(Math.random()*2)?'o':'O');
-		msg.channel.send(owo);
+		let o = (Math.floor(Math.random()*2)?'o':'O');
+		let w = (Math.floor(Math.random()*2)?'w':'W');
+		msg.channel.send(o + w + o);
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'help')){
 		const embed = new RichEmbed()
 				.setTitle('Command Help')
