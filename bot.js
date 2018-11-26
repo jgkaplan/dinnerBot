@@ -97,9 +97,15 @@ client.on('message', msg => {
 			msg.channel.send('Error: Unable to fetch dining data.');
 		});
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'owo')){
-		msg.reply('uwu');
+		let uwu = (Math.floor(Math.random()*2)?'u':'U')
+				+ (Math.floor(Math.random()*2)?'w':'W')
+				+ (Math.floor(Math.random()*2)?'u':'U');
+		msg.channel.send(uwu);
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'uwu')){
-		msg.reply('owo');
+		let owo = (Math.floor(Math.random()*2)?'o':'O')
+				+ (Math.floor(Math.random()*2)?'w':'W')
+				+ (Math.floor(Math.random()*2)?'o':'O');
+		msg.channel.send(owo);
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'help')){
 		const embed = new RichEmbed()
 				.setTitle('Command Help')
