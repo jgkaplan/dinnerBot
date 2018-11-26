@@ -13,9 +13,9 @@ function isToday(day){
 
 client.on('message', msg => {
 	if(msg.author === client.user) return;
-	if (msg.content.startsWith(config.startingSymbol + 'ping')) {
+	if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'ping')) {
 		msg.reply('pong');
-	}else if (msg.content.startsWith(config.startingSymbol + 'poll')) {
+	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'poll')) {
 		const embed = new RichEmbed()
 			.setTitle('Dinner Poll')
 			.setColor(0x9909f2)
@@ -28,7 +28,7 @@ client.on('message', msg => {
 			sentMessage.react('🇨');
 			sentMessage.react('🇰');
 		}).catch((err) => {});
-	}else if (msg.content.startsWith(config.startingSymbol + 'dining')) {
+	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'dining')) {
 		axios.get('https://now.dining.cornell.edu/api/1.0/dining/eateries.json').then((diningData) => {
 			let diningHalls = diningData.data.data.eateries;
 			// let hallFoods = diningHalls
@@ -96,7 +96,11 @@ client.on('message', msg => {
 			console.log(err);
 			msg.channel.send('Error: Unable to fetch dining data.');
 		});
-	}else if(msg.content.startsWith(config.startingSymbol + 'help')){
+	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'owo')){
+		msg.reply('uwu');
+	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'uwu')){
+		msg.reply('owo');
+	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'help')){
 		const embed = new RichEmbed()
 				.setTitle('Command Help')
 				.setColor(0x0392cf)
@@ -105,10 +109,12 @@ client.on('message', msg => {
 				.addField(config.startingSymbol+'poll', 'Start a dinner poll. Click the reacts to vote.')
 				.addField(config.startingSymbol+'dining', 'Get information about dinner options at the West Campus dining halls.')
 				.addField(config.startingSymbol+'anyone or @anyone', 'Alert a random person in the channel.')
+				.addField(config.startingSymbol+'owo', 'uwu')
+				.addField(config.startingSymbol+'uwu', 'owo')
 				.addField(config.startingSymbol+'help', 'Display this help information.');
 		msg.channel.send(embed);
 	}
-	if(msg.content.startsWith(config.startingSymbol + 'anyone') || msg.content.includes('@anyone')) {
+	if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'anyone') || msg.content.toLowerCase().includes('@anyone')) {
 		msg.channel.send("", {reply: msg.channel.members.random()});
 	}
 });
