@@ -19,8 +19,9 @@ client.on('message', msg => {
 		const embed = new RichEmbed()
 			.setTitle('Dinner Poll')
 			.setColor(0x9909f2)
-			.setDescription('Where do people want to go for dinner?')
-			.setFooter('🇧: Becker, 🇯: Bethe, 🇷: Rose, 🇨: Cook, 🇰: Keeton');
+			.setDescription('Where do people want to go for dinner?\n \
+				🇧: Becker, 🇯: Bethe, 🇷: Rose, 🇨: Cook, 🇰: Keeton');
+			// .setFooter('🇧: Becker, 🇯: Bethe, 🇷: Rose, 🇨: Cook, 🇰: Keeton');
 		msg.channel.send(embed).then((sentMessage) => {
 			sentMessage.react('🇧'); //B
 			sentMessage.react('🇯'); //J
