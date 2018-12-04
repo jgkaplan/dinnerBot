@@ -120,18 +120,25 @@ client.on('message', msg => {
 		msg.channel.send(embed);
 	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'anyone') || msg.content.toLowerCase().includes('@anyone')) {
 		msg.channel.send("", {reply: msg.channel.members.random()});
-	}else{
-		let lastMsg = msg.channel.lastSendMessage || "";
-		console.log(lastMsg);
-		let hasEchoed = msg.channel.botReplied || false;
-		if(msg.content.toLowerCase() == lastMsg && !hasEchoed){
-			msg.channel.send(lastMsg);
-			msg.channel.botReplied = true;
-		}else{
-			msg.channel.lastSentMessage = msg.content.toLowerCase();
-			msg.channel.botReplied = false;
-		}
 	}
+	// else{
+	// 	msg.channel.fetchMessages({
+	// 		limit: 10 
+	// 	}).then(messages => {
+	// 		messages
+	// 	})
+ //  .catch(console.error);
+	// 	let lastMsg = msg.channel.lastSendMessage || "";
+	// 	console.log(lastMsg);
+	// 	let hasEchoed = msg.channel.botReplied || false;
+	// 	if(msg.content.toLowerCase() == lastMsg && !hasEchoed){
+	// 		msg.channel.send(lastMsg);
+	// 		msg.channel.botReplied = true;
+	// 	}else{
+	// 		msg.channel.lastSentMessage = msg.content.toLowerCase();
+	// 		msg.channel.botReplied = false;
+	// 	}
+	// }
 });
 
 client.login(process.env.BOTKEY);
