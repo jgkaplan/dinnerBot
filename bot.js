@@ -118,9 +118,18 @@ client.on('message', msg => {
 				.addField(config.startingSymbol+'uwu', 'owo')
 				.addField(config.startingSymbol+'help', 'Display this help information.');
 		msg.channel.send(embed);
-	}
-	if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'anyone') || msg.content.toLowerCase().includes('@anyone')) {
+	}else if(msg.content.toLowerCase().startsWith(config.startingSymbol + 'anyone') || msg.content.toLowerCase().includes('@anyone')) {
 		msg.channel.send("", {reply: msg.channel.members.random()});
+	}else{
+		let lastMsg = msg.channel.lastSendMessage || "";
+		let hasEchoed = msg.channel.botReplied || false;
+		if(msg.content.toLowerCase() == lastMsg && !hasEchoed){
+			msg.channel.send(lastMsg);
+			msg.channel.botReplied = true;
+		}else{
+			msg.channel.lastSentMessage = msg.content.toLowerCase();
+			msg.channel.botReplied = false;
+		}
 	}
 });
 
