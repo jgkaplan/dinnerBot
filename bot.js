@@ -122,6 +122,7 @@ client.on('message', msg => {
 		msg.channel.send("", {reply: msg.channel.members.random()});
 	}else{
 		let lastMsg = msg.channel.lastSendMessage || "";
+		console.log(lastMsg);
 		let hasEchoed = msg.channel.botReplied || false;
 		if(msg.content.toLowerCase() == lastMsg && !hasEchoed){
 			msg.channel.send(lastMsg);
