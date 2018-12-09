@@ -23,11 +23,15 @@ client.on('message', msg => {
 				🇧: Becker, 🇯: Bethe, 🇷: Rose, 🇨: Cook, 🇰: Keeton');
 			// .setFooter('🇧: Becker, 🇯: Bethe, 🇷: Rose, 🇨: Cook, 🇰: Keeton');
 		msg.channel.send(embed).then((sentMessage) => {
-			sentMessage.react('🇧'); //B
-			sentMessage.react('🇯'); //J
-			sentMessage.react('🇷'); //R
-			sentMessage.react('🇨'); //C
-			sentMessage.react('🇰'); //K
+			sentMessage.react('🇧').then(() => { //B
+				return sentMessage.react('🇯'); //J
+			}).then(() => {
+				return sentMessage.react('🇷'); //R
+			}).then(() => {
+				return sentMessage.react('🇨'); //C
+			}).then(() => {
+				return sentMessage.react('🇰'); //K
+			}); 		
 		}).catch((err) => {});
 	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'dining')) {
 		axios.get('https://now.dining.cornell.edu/api/1.0/dining/eateries.json').then((diningData) => {
