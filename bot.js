@@ -31,9 +31,9 @@ client.on('message', msg => {
 				return sentMessage.react('🇨'); //C
 			}).then(() => {
 				return sentMessage.react('🇰'); //K
-			}); 		
+			});
 		}).catch((err) => {});
-	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'dining')) {
+	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'dining') || msg.content.toLowerCase().startsWith(config.startingSymbol + 'dinner')) {
 		axios.get('https://now.dining.cornell.edu/api/1.0/dining/eateries.json').then((diningData) => {
 			let diningHalls = diningData.data.data.eateries;
 			// let hallFoods = diningHalls
@@ -127,7 +127,7 @@ client.on('message', msg => {
 	}
 	// else{
 	// 	msg.channel.fetchMessages({
-	// 		limit: 10 
+	// 		limit: 10
 	// 	}).then(messages => {
 	// 		messages
 	// 	})
