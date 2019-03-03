@@ -1,14 +1,14 @@
 const config = require('./config.json');
 const { Client, RichEmbed } = require('discord.js');
 const axios = require('axios');
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 const client = new Client();
 
 function isToday(day){
-	return day.date() == moment().date()
-		&& day.year() == moment().year()
-		&& day.month() == moment().month();
+	return day.date() == moment().tz('America/New_York').date()
+		&& day.year() == moment().tz('America/New_York').year()
+		&& day.month() == moment().tz('America/New_York').month();
 }
 
 client.on('message', msg => {
