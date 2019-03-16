@@ -12,7 +12,7 @@ function isToday(day){
 }
 
 client.on('message', msg => {
-	if(msg.author === client.user) return;
+	if(msg.author === client.user || !msg.member.roles.find(r => r.name === "bot_access")) return;
 	if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'ping')) {
 		msg.reply('pong');
 	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'poll')) {
@@ -72,6 +72,7 @@ client.on('message', msg => {
 				.setTitle('West Campus Menus')
 				.setColor(0x7bc043)
 				.setDescription('Menus of the West Campus dining halls');
+            // let potatoHalls = [];
 			for(let hall of hallFoods){
 				// let tmp = hall.food.reduce(function(memo, food) {
 				//     if (!memo[food.category]) memo[food.category] = [];
@@ -85,13 +86,20 @@ client.on('message', msg => {
 				// 	}
 				// 	return l.join('\n');
 				// }).join('\n');
+                // let hasPotatoes = false;
 				let foodList = hall.food.map(function(menuItem){
 					let l = [`__${menuItem.category}__`];
 					for(item of menuItem.items){
 						l.push(`\t- ${item.item}`);
+                        // if(item.includes('potato')){
+                        //     hasPotatoes = true;
+                        // }
 					}
 					return l.join('\n');
 				}).join('\n');
+                // if(hasPotatoes){
+                //     potatoHalls.push(hall.name);
+                // }
 				embed.addField(hall.name, foodList);
 			}
 			msg.channel.send(embed);
