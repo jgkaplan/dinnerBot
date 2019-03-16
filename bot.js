@@ -12,7 +12,7 @@ function isToday(day){
 }
 
 client.on('message', msg => {
-	if(msg.author === client.user || !msg.member.roles.find(r => r.name === "bot_access")) return;
+	if(msg.author === client.user || (msg.member != null && !msg.member.roles.find(r => r.name === "bot_access"))) return;
 	if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'ping')) {
 		msg.reply('pong');
 	}else if (msg.content.toLowerCase().startsWith(config.startingSymbol + 'poll')) {
