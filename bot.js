@@ -100,8 +100,9 @@ client.on('message', msg => {
                 // if(hasPotatoes){
                 //     potatoHalls.push(hall.name);
                 // }
-                console.log(hall);
-				embed.addField(hall.name, foodList);
+                if(foodList.length() != 0){
+                	embed.addField(hall.name, foodList);
+                }
 			}
 			msg.channel.send(embed);
 			// console.log(diningHalls.map(function(o){return o.nameshort}));
