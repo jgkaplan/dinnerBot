@@ -100,6 +100,7 @@ client.on('message', msg => {
                 // if(hasPotatoes){
                 //     potatoHalls.push(hall.name);
                 // }
+                console.log(hall);
 				embed.addField(hall.name, foodList);
 			}
 			msg.channel.send(embed);
