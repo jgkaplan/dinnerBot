@@ -100,7 +100,7 @@ client.on('message', msg => {
                 // if(hasPotatoes){
                 //     potatoHalls.push(hall.name);
                 // }
-                if(foodList.length() != 0){
+                if(foodList.length != 0){
                 	embed.addField(hall.name, foodList);
                 }
 			}
